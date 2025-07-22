@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="This is a landing page with a Simple User Form."
+    />
+    <meta name="author" content="Suman Saha" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../Stylesheets/formStyle.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="form-container">
+        <div class="form-left">
+          <div>
+            <h2 class="heading">Create your Account</h2>
+            <p class="required-message">
+              All Fields are Required (<span class="error-class">*</span>)
+            </p>
+            <form method="get" id="basicForm">
+              <!-- <label  for="fname">Full Name:</label><br /> -->
+              <input
+                class="input-field"
+                type="text"
+                id="fname"
+                name="fname"
+                required
+                placeholder="Suman"
+              /><br />
+              <div id="error-message-name"></div>
+
+              <!-- <label  for="email">Email:</label><br /> -->
+              <input
+                class="input-field"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="suman@co.com"
+                required
+              /><br />
+              <div id="error-message-email"></div>
+
+              <!-- <label  for="pword">Password:</label><br /> -->
+              <input
+                class="input-field"
+                placeholder="Password"
+                type="password"
+                id="pword"
+                name="pword"
+                required
+              />
+              <div id="error-message-password"></div>
+
+              <div id="gender-container">
+                <label>Gender</label>
+                <div>
+                  <input type="radio" id="male" name="gender" value="male" />
+                  <label for="male">Male</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    value="female"
+                  />
+                  <label for="female">Female</label>
+                </div>
+              </div>
+              <div id="error-message-gender"></div>
+
+              <select name="city" id="city" required>
+                <option class="values" value="">Select City</option>
+                <option class="values" value="kolkata">Kolkata</option>
+                <option class="values" value="delhi">Delhi</option>
+                <option class="values" value="mumbai">Mumbai</option>
+              </select>
+
+              <div id="error-message-city"></div>
+              <br />
+              <div class="submit-box">
+                <input type="submit" id="submit" value="Submit" onclick="{}" />
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="form-right">
+          <div class="right-content">
+            <h3 style="text-align: center; margin-bottom: 20px">
+              Glad to see you!
+            </h3>
+            <p style="text-align: center">
+              Please Enter your valid details for smooth Register Experience
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script>
+      document
+        .getElementById("basicForm")
+        .addEventListener("submit", function (event) {
+          const fullName = document.getElementById("fname").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("pword").value;
+          const genderSelected = document.querySelector(
+            'input[name="gender"]:checked'
+          );
+          const city = document.getElementById("city").value;
+          const error = document.getElementById("error-message");
+
+          const namePattern = /^[A-Za-z\s]+$/;
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          const passwordPattern =
+            /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&* ]{8,}$/;
+
+          if (fullName === "" || !namePattern.test(fullName)) {
+            const newParagraphName = document.createElement("p");
+            newParagraphName.textContent =
+              "Please enter a valid name (no numbers or special characters).";
+            newParagraphName.classList.add("error-class");
+            error.appendChild(newParagraphName);
+            // alert(
+            //   "Please enter a valid name (no numbers or special characters)."
+            // );
+            event.preventDefault();
+
+            return;
+          } else {
+            error.removeChild(newParagraphName);
+          }
+
+          if (!emailPattern.test(email)) {
+            const newParagraph = document.createElement("p");
+            newParagraph.textContent = "Please enter a valid email address.";
+            newParagraph.classList.add("error-class");
+            error.appendChild(newParagraph);
+            // alert("Please enter a valid email address.");
+            event.preventDefault();
+            return;
+          }
+
+          if (!passwordPattern.test(password)) {
+            // alert(
+            //   "Password must be at least 8 characters long, contain at least one number and one special character."
+            // );
+            const newParagraph = document.createElement("p");
+            newParagraph.textContent =
+              "Password must be at least 8 characters long, contain at least one number and one special character.";
+            newParagraph.classList.add("error-class");
+            error.appendChild(newParagraph);
+            event.preventDefault();
+            return;
+          }
+
+          if (!genderSelected) {
+            // alert("Please select your gender.");
+            const newParagraph = document.createElement("p");
+            newParagraph.textContent = "Please select your gender.";
+            newParagraph.classList.add("error-class");
+            error.appendChild(newParagraph);
+            event.preventDefault();
+            return;
+          }
+
+          if (city === "") {
+            // alert("Please select a city.");
+            const newParagraph = document.createElement("p");
+            newParagraph.textContent = "Please select a city.";
+            newParagraph.classList.add("error-class");
+            error.appendChild(newParagraph);
+            event.preventDefault();
+            return;
+          }
+
+          setTimeout(() => {
+            window.location.href = "./index.html";
+            event.preventDefault();
+          }, 1000); // 1 second delay
+        });
+    </script> -->
+    <script>
+      document
+        .getElementById("basicForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // always prevent default at the top
+
+          const fullName = document.getElementById("fname").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("pword").value;
+          const genderSelected = document.querySelector(
+            'input[name="gender"]:checked'
+          );
+          const city = document.getElementById("city").value;
+
+          // Error Sections
+          const errorname = document.getElementById("error-message-name");
+          const erroremail = document.getElementById("error-message-email");
+          const errorpassword = document.getElementById(
+            "error-message-password"
+          );
+          const errorgender = document.getElementById("error-message-gender");
+          const errorcity = document.getElementById("error-message-city");
+
+          // Clear previous errors
+          errorname.innerHTML = "";
+          erroremail.innerHTML = "";
+          errorpassword.innerHTML = "";
+          errorgender.innerHTML = "";
+          errorcity.innerHTML = "";
+
+          errorname.classList.add("error-class");
+          erroremail.classList.add("error-class");
+          errorpassword.classList.add("error-class");
+          errorgender.classList.add("error-class");
+          errorcity.classList.add("error-class");
+
+          const namePattern = /^[A-Za-z\s]+$/;
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          const passwordPattern =
+            /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&* ]{8,}$/;
+
+          // Sequential validation (show one error at a time)
+          if (fullName === "" || !namePattern.test(fullName)) {
+            errorname.textContent =
+              "Please enter a valid name (no numbers or special characters).";
+            return;
+          }
+
+          if (!emailPattern.test(email)) {
+            erroremail.textContent = "Please enter a valid email address.";
+            return;
+          }
+
+          if (!passwordPattern.test(password)) {
+            errorpassword.textContent =
+              "Password must be at least 8 characters long, contain at least one number and one special character.";
+            return;
+          }
+
+          if (!genderSelected) {
+            errorgender.textContent = "Please select your gender.";
+            return;
+          }
+
+          if (city === "") {
+            errorcity.textContent = "Please select a city.";
+            return;
+          }
+
+          // All fields are valid – redirect after short delay
+          errorcity.textContent = "Form submitted successfully! Redirecting...";
+          setTimeout(() => {
+            window.location.href = "Login.html"; // change to your actual redirect page
+          }, 1000);
+        });
+    </script>
+  </body>
+</html>

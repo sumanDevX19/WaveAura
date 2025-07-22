@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="This is a landing page with a Simple User Form."
+    />
+    <meta name="author" content="Suman Saha" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../Stylesheets/formStyle.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="form-container">
+        <div class="form-left">
+          <div>
+            <h2 class="heading">Login</h2>
+            <p class="required-message">
+              All Fields are Required (<span class="error-class">*</span>)
+            </p>
+            <form method="get" id="basicForm">
+              <input
+                class="input-field"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="suman@co.com"
+                required
+              /><br />
+              <div id="error-message-email"></div>
+
+              <!-- <label  for="pword">Password:</label><br /> -->
+              <input
+                class="input-field"
+                placeholder="Password"
+                type="password"
+                id="pword"
+                name="pword"
+                required
+              />
+              <div id="error-message-password"></div>
+
+              <br />
+              <div class="submit-box">
+                <input type="submit" id="submit" value="Submit" onclick="{}" />
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="form-right">
+          <div class="right-content">
+            <h3 style="text-align: center; margin-bottom: 20px">
+              Glad to see you!
+            </h3>
+            <p style="text-align: center">
+              Please Enter your valid details for smooth Register Experience
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("basicForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // always prevent default at the top
+
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("pword").value;
+
+          // Error Sections
+
+          const erroremail = document.getElementById("error-message-email");
+          const errorpassword = document.getElementById(
+            "error-message-password"
+          );
+
+          // Clear previous errors
+
+          erroremail.innerHTML = "";
+          errorpassword.innerHTML = "";
+
+          erroremail.classList.add("error-class");
+          errorpassword.classList.add("error-class");
+
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          const passwordPattern =
+            /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&* ]{8,}$/;
+
+          // Sequential validation (show one error at a time)
+
+          if (!emailPattern.test(email)) {
+            erroremail.textContent = "Please enter a valid email address.";
+            return;
+          }
+
+          if (!passwordPattern.test(password)) {
+            errorpassword.textContent =
+              "Password must be at least 8 characters long, contain at least one number and one special character.";
+            return;
+          }
+
+          // All fields are valid – redirect after short delay
+          errorpassword.textContent =
+            "Form submitted successfully! Redirecting...";
+          setTimeout(() => {
+            window.location.href = "index.html"; // change to your actual redirect page
+          }, 1000);
+        });
+    </script>
+  </body>
+</html>
