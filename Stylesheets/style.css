@@ -619,6 +619,36 @@ body {
     color: #fff;
 }
 
+/* Responsive Menu  */
+
+.responsive-menu{
+    width: 200px;
+    background-color: #fff;
+    position: absolute;
+    right: 20px;
+    top: 50px;
+    display: none;
+    
+    flex-direction: column;
+    z-index: 10;
+    gap: 6px;
+    padding: 20px ;
+    justify-content: center;
+    align-items: end;
+    border: none;
+    border-radius: 20px 5px;
+}
+
+.responsive-menu.active{
+    display: flex;
+}
+
+.responsive-menu-icon{
+    text-decoration: none;
+    color: #000;
+}
+
+
 
 /* Animation  */
 
