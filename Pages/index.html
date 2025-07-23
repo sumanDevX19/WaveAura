@@ -80,6 +80,16 @@
       <a href="" class="navlink" id="menu-icon"
         ><i class="fa-solid fa-bars fa-2xl"></i
       ></a>
+
+      <div class="responsive-menu">
+        <a href="" class="responsive-menu-icon">Home</a>
+        <a href="" class="responsive-menu-icon">Store</a>
+        <a href="" class="responsive-menu-icon">About</a>
+        <a href="" class="responsive-menu-icon">Contact</a>
+        <a href="" class="responsive-menu-icon">Sign Up</a>
+        
+
+      </div>
     </header>
     <main>
       <!-- First Section  -->
@@ -302,25 +312,33 @@
                 type="text"
                 placeholder="Name"
                 required
+                name="name"
                 pattern="^[A-Za-z\s]+$"
               />
-              <br />
+              <br>
+              <span class="error" id="nameError"></span><br />
+              
               <input
                 class="contact-field"
                 type="email"
                 placeholder="Email"
                 required
+                name="email"
                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
               />
-              <br />
+              <br>
+              <span class="error" id="emailError"></span><br />
+              
               <textarea
                 class="contact-textarea"
                 name="message"
                 placeholder="Your Message"
                 rows="5"
                 required
-              ></textarea
-              ><br />
+              ></textarea>
+              <br>
+               <span class="error" id="messageError"></span><br />
+              
               <input class="contact-submit" type="submit" value="Submit" />
             </form>
           </div>
@@ -412,7 +430,59 @@
         <p>&copy; 2025 WaveAura. All rights reserved.</p>
       </div>
     </footer>
+    <script src="../Scripts/menutoggler.js"></script>
+    <script>
+    document.getElementById("contact-from").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Clear previous errors
+      document.getElementById("nameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("messageError").textContent = "";
+
+      let isValid = true;
+
+      const formData = new FormData(this);
+
+      for (let [field, value] of formData.entries()) {
+        switch (field) {
+          case "name":
+            if (value.trim() === "") {
+              document.getElementById("nameError").textContent = "Name is required.";
+              isValid = false;
+            }
+            break;
+
+          case "email":
+            const emailRegex = /^\S+@\S+\.\S+$/;
+            if (!emailRegex.test(value.trim())) {
+              document.getElementById("emailError").textContent = "Invalid email address.";
+              isValid = false;
+            }
+            break;
+
+          case "message":
+            if (value.trim().length < 10) {
+              document.getElementById("messageError").textContent = "Message must be at least 10 characters.";
+              isValid = false;
+            }
+            break;
+
+          default:
+            console.warn(`Unexpected field: ${field}`);
+        }
+      }
+
+      if (isValid) {
+        
+        
+        this.reset();
+      }
+    });
+  </script>
+
+    
   </body>
-  <!-- Feature 1 Code Yes -->
+
 
 </html>
