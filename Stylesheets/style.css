@@ -547,6 +547,11 @@ body {
 
 /* Newsletter Section End */
 
+.error{
+    color:#ff0000;
+    font-weight: 300;
+}
+
 
 /* Footer Code  */
 .footer {

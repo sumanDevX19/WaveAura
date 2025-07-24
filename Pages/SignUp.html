@@ -252,9 +252,18 @@
             return;
           }
 
+           const userobj = {
+              name: fullName,
+              email: email,
+            };
+
           // All fields are valid – redirect after short delay
           errorcity.textContent = "Form submitted successfully! Redirecting...";
           setTimeout(() => {
+           
+
+            localStorage.setItem("user", JSON.stringify(userobj));
+
             window.location.href = "Login.html"; // change to your actual redirect page
           }, 1000);
         });
