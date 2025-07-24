@@ -39,7 +39,7 @@
         <a href="#" class="navlink">About</a>
         <a href="#" class="navlink">Contact</a>
         <!-- <a href="#" class="navlink">Login</a> -->
-        <a href="../Pages/SignUp.html" class="navlink">Sign Up</a>
+        <a href="../Pages/SignUp.html" class="navlink" id="user-container">Sign Up</a>
 
         <!-- <a href="" class="navlink" id="usericon"><i class="fa-solid fa-circle-user fa-2xl"></i></a> -->
         <div class="navmenu">
@@ -306,7 +306,7 @@
           </div>
           <div class="contact-right">
             <h2>Contact Us</h2>
-            <form action="" id="contact-from">
+            <form action="#" method="get" id="contact-from">
               <input
                 class="contact-field"
                 type="text"
@@ -430,7 +430,9 @@
         <p>&copy; 2025 WaveAura. All rights reserved.</p>
       </div>
     </footer>
+    <!-- External JS  -->
     <script src="../Scripts/menutoggler.js"></script>
+    <!-- Internal JS  -->
     <script>
     document.getElementById("contact-from").addEventListener("submit", function (e) {
       e.preventDefault();
@@ -474,11 +476,30 @@
       }
 
       if (isValid) {
-        
-        
         this.reset();
       }
     });
+  </script>
+  <script>
+    const isLoggedIn = false;
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const user_container = document.querySelector("#user-container");
+
+    
+    console.log(user_container);
+    
+    
+
+    if(user){
+      console.log(typeof user);
+      
+      user_container.textContent = "";
+      user_container.textContent = `Hello, ${user.name.split(" ")[0]}`;
+      console.log(user.name);
+      
+      
+    }
   </script>
 
     
