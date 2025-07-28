@@ -10,9 +10,17 @@
     <meta name="author" content="Suman Saha" />
     <title>Sign Up</title>
     <link rel="stylesheet" href="../Stylesheets/formStyle.css" />
+    <link
+      rel="shortcut icon"
+      href="../headphone_resources/Favicon/favicon.ico"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <div class="main-container">
+      <div id="toast" class="toast">
+        <span id="toast-message"></span>
+      </div>
       <div class="form-container">
         <div class="form-left">
           <div>
@@ -20,7 +28,7 @@
             <p class="required-message">
               All Fields are Required (<span class="error-class">*</span>)
             </p>
-            <form method="get" id="basicForm">
+            <form method="post" id="basicForm">
               <input
                 class="input-field"
                 type="email"
@@ -54,8 +62,11 @@
             <h3 style="text-align: center; margin-bottom: 20px">
               Glad to see you!
             </h3>
-            <p style="text-align: center">
+            <p style="text-align: center; margin-bottom: 30px;">
               Please Enter your valid details for smooth Register Experience
+            </p>
+            <p style="align-items: center;">
+              Don't have an Account <a style="text-decoration: none; color:#000" href="../Pages/SignUp.html">Sign Up</a>
             </p>
           </div>
         </div>
@@ -63,9 +74,21 @@
     </div>
 
     <script>
+      function showToast(message, type = "success") {
+        const toast = document.getElementById("toast");
+        const msg = document.getElementById("toast-message");
+
+        msg.textContent = message;
+
+        toast.className = `toast show ${type}`;
+
+        setTimeout(() => {
+          toast.className = "toast"; // hide after 3 sec
+        }, 3000);
+      }
       document
         .getElementById("basicForm")
-        .addEventListener("submit", function (event) {
+        .addEventListener("submit", async function (event) {
           event.preventDefault(); // always prevent default at the top
 
           const email = document.getElementById("email").value.trim();
@@ -103,12 +126,45 @@
             return;
           }
 
+          // Sending Form Data
+
+          const formData = new FormData();
+
+          formData.append("email", email);
+          formData.append("password", password);
+
+          try {
+            const result = await fetch(
+              `http://localhost/WaveAura/Backend/login.php`,
+              {
+                method: "POST",
+                body: formData,
+                credentials: "include"
+              }
+            );
+
+            const response = await result.text();
+            if (response.includes("✅ Login successful")) {
+              showToast(response, "success");
+
+             
+
+              setTimeout(() => {
+                window.location.href = "index.php";
+              }, 1000);
+            } else {
+              showToast(response, "error");
+            }
+          } catch (err) {
+            console.log(err.message);
+          }
+
           // All fields are valid – redirect after short delay
-          errorpassword.textContent =
-            "Form submitted successfully! Redirecting...";
-          setTimeout(() => {
-            window.location.href = "index.html"; // change to your actual redirect page
-          }, 1000);
+          // errorpassword.textContent =
+          //   "Form submitted successfully! Redirecting...";
+          // setTimeout(() => {
+          //   window.location.href = "index.html"; // change to your actual redirect page
+          // }, 1000);
         });
     </script>
   </body>
