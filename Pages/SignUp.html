@@ -10,9 +10,17 @@
     <meta name="author" content="Suman Saha" />
     <title>Sign Up</title>
     <link rel="stylesheet" href="../Stylesheets/formStyle.css" />
+    <link
+      rel="shortcut icon"
+      href="../headphone_resources/Favicon/favicon.ico"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <div class="main-container">
+      <div id="toast" class="toast">
+        <span id="toast-message"></span>
+      </div>
       <div class="form-container">
         <div class="form-left">
           <div>
@@ -20,7 +28,7 @@
             <p class="required-message">
               All Fields are Required (<span class="error-class">*</span>)
             </p>
-            <form method="get" id="basicForm">
+            <form method="post" id="basicForm">
               <!-- <label  for="fname">Full Name:</label><br /> -->
               <input
                 class="input-field"
@@ -92,101 +100,34 @@
             <h3 style="text-align: center; margin-bottom: 20px">
               Glad to see you!
             </h3>
-            <p style="text-align: center">
+            <p style="text-align: center; margin-bottom: 20px">
               Please Enter your valid details for smooth Register Experience
+            </p>
+            <p style="align-items: center;">
+              Already have an Account <a style="text-decoration: none; color:#000" href="../Pages/Login.html">Sign In</a>
             </p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- <script>
-      document
-        .getElementById("basicForm")
-        .addEventListener("submit", function (event) {
-          const fullName = document.getElementById("fname").value.trim();
-          const email = document.getElementById("email").value.trim();
-          const password = document.getElementById("pword").value;
-          const genderSelected = document.querySelector(
-            'input[name="gender"]:checked'
-          );
-          const city = document.getElementById("city").value;
-          const error = document.getElementById("error-message");
-
-          const namePattern = /^[A-Za-z\s]+$/;
-          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          const passwordPattern =
-            /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&* ]{8,}$/;
-
-          if (fullName === "" || !namePattern.test(fullName)) {
-            const newParagraphName = document.createElement("p");
-            newParagraphName.textContent =
-              "Please enter a valid name (no numbers or special characters).";
-            newParagraphName.classList.add("error-class");
-            error.appendChild(newParagraphName);
-            // alert(
-            //   "Please enter a valid name (no numbers or special characters)."
-            // );
-            event.preventDefault();
-
-            return;
-          } else {
-            error.removeChild(newParagraphName);
-          }
-
-          if (!emailPattern.test(email)) {
-            const newParagraph = document.createElement("p");
-            newParagraph.textContent = "Please enter a valid email address.";
-            newParagraph.classList.add("error-class");
-            error.appendChild(newParagraph);
-            // alert("Please enter a valid email address.");
-            event.preventDefault();
-            return;
-          }
-
-          if (!passwordPattern.test(password)) {
-            // alert(
-            //   "Password must be at least 8 characters long, contain at least one number and one special character."
-            // );
-            const newParagraph = document.createElement("p");
-            newParagraph.textContent =
-              "Password must be at least 8 characters long, contain at least one number and one special character.";
-            newParagraph.classList.add("error-class");
-            error.appendChild(newParagraph);
-            event.preventDefault();
-            return;
-          }
-
-          if (!genderSelected) {
-            // alert("Please select your gender.");
-            const newParagraph = document.createElement("p");
-            newParagraph.textContent = "Please select your gender.";
-            newParagraph.classList.add("error-class");
-            error.appendChild(newParagraph);
-            event.preventDefault();
-            return;
-          }
-
-          if (city === "") {
-            // alert("Please select a city.");
-            const newParagraph = document.createElement("p");
-            newParagraph.textContent = "Please select a city.";
-            newParagraph.classList.add("error-class");
-            error.appendChild(newParagraph);
-            event.preventDefault();
-            return;
-          }
-
-          setTimeout(() => {
-            window.location.href = "./index.html";
-            event.preventDefault();
-          }, 1000); // 1 second delay
-        });
-    </script> -->
     <script>
+      function showToast(message, type = "success") {
+        const toast = document.getElementById("toast");
+        const msg = document.getElementById("toast-message");
+
+        msg.textContent = message;
+
+        toast.className = `toast show ${type}`;
+
+        setTimeout(() => {
+          toast.className = "toast"; // hide after 3 sec
+        }, 3000);
+      }
+
       document
         .getElementById("basicForm")
-        .addEventListener("submit", function (event) {
+        .addEventListener("submit", async function (event) {
           event.preventDefault(); // always prevent default at the top
 
           const fullName = document.getElementById("fname").value.trim();
@@ -252,20 +193,43 @@
             return;
           }
 
-           const userobj = {
-              name: fullName,
-              email: email,
-            };
+          // Form Data Adding
 
-          // All fields are valid – redirect after short delay
-          errorcity.textContent = "Form submitted successfully! Redirecting...";
-          setTimeout(() => {
-           
+          const formData = new FormData();
 
-            localStorage.setItem("user", JSON.stringify(userobj));
+          formData.append("fname", fullName);
+          formData.append("email", email);
+          formData.append("password", password);
+          formData.append("gender", genderSelected.value);
+          formData.append("city", city);
 
-            window.location.href = "Login.html"; // change to your actual redirect page
-          }, 1000);
+          // Fetch Data
+          try {
+            const res = await fetch(
+              "http://localhost/WaveAura/Backend/signup.php",
+              {
+                method: "POST",
+                body: formData,
+              }
+            );
+
+            const result = await res.text();
+
+            if (result.includes("✅ User registered successfully")) {
+              // ✅ Signup successful → redirect to login page
+              showToast("✅ Account created successfully!", "success");
+              setTimeout(() => {
+                window.location.href = "Login.html";
+              }, 3000);
+            } else {
+              // ❌ Show message on screen instead
+              console.log("Signup failed: " + result);
+
+              showToast("❌ Email already exists!", "error");
+            }
+          } catch (err) {
+            console.log(err.message);
+          }
         });
     </script>
   </body>

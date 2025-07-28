@@ -27,6 +27,7 @@
       href="../headphone_resources/Favicon/favicon.ico"
       type="image/x-icon"
     />
+    
   </head>
   <body>
     <header class="head-section">
@@ -38,8 +39,24 @@
         <a href="#hero" class="navlink" id="store">Store</a>
         <a href="#" class="navlink">About</a>
         <a href="#" class="navlink">Contact</a>
-        <!-- <a href="#" class="navlink">Login</a> -->
-        <a href="../Pages/SignUp.html" class="navlink" id="user-container">Sign Up</a>
+        <?php
+          $fullName = $_COOKIE['user_name'] ?? 'Guest';
+          $nameParts = explode(" ", $fullName);
+          $firstName = $nameParts[0] ?? 'Guest';
+        ?>
+
+
+
+        <a href="#" class="navlink" id="user-container">Welcome, <?= htmlspecialchars($firstName) ?>!</a>
+        <?php
+          $userLoggedIn = isset($_COOKIE['user_email']);
+        ?>
+        <?php if ($userLoggedIn): ?>
+            <a href="../Pages/logout.php" class="navlink">Logout</a>
+        <?php else: ?>
+            <a href="../Pages/Login.html" class="navlink">Login</a>
+        <?php endif; ?>
+        <!-- <a href="../Pages/Login.html" class="navlink">Login</a> -->
 
         <!-- <a href="" class="navlink" id="usericon"><i class="fa-solid fa-circle-user fa-2xl"></i></a> -->
         <div class="navmenu">
@@ -354,9 +371,11 @@
             src="https://www.youtube.com/embed/WKdotkKJQYQ?si=FWkCxc-ji3oe0IFR"
             title="YouTube video player"
             frameborder="0"
+            
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
           ></iframe>
+          
           <iframe
             class="frames"
             src="https://www.youtube.com/embed/Cw6NXfP9BDg?si=xrJxxtvxJ8mdBjBN"
@@ -501,6 +520,7 @@
       
     }
   </script>
+  
 
     
   </body>
