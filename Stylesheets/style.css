@@ -385,6 +385,7 @@ body {
 
 /* Contact Section Starts  */
 .contact-container {
+    position: relative;
     max-width: 100%;
     width: 100%;
     height: 500px;
@@ -1581,3 +1582,37 @@ body {
 }
 
 }
+
+
+
+.toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px 24px;
+        border-radius: 8px;
+        background-color: #333;
+        color: #fff;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+      }
+
+      /* Show toast */
+      .toast.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      /* Success type */
+      .toast.success {
+        background-color: #28a745;
+      }
+
+      /* Error type */
+      .toast.error {
+        background-color: #dc3545;
+      }

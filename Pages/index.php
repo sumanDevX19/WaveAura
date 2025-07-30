@@ -39,22 +39,32 @@
         <a href="#hero" class="navlink" id="store">Store</a>
         <a href="#" class="navlink">About</a>
         <a href="#" class="navlink">Contact</a>
+        
+
         <?php
-          $fullName = $_COOKIE['user_name'] ?? 'Guest';
+          session_start();
+          $fullName = $_SESSION['user_name'] ?? 'Guest';
           $nameParts = explode(" ", $fullName);
           $firstName = $nameParts[0] ?? 'Guest';
+
+
         ?>
 
+        <script>
+            const jwt = "<?php echo $_SESSION['jwt'] ?? ''; ?>";
+            console.log(jwt);
+        </script>
 
 
-        <a href="#" class="navlink" id="user-container">Welcome, <?= htmlspecialchars($firstName) ?>!</a>
-        <?php
-          $userLoggedIn = isset($_COOKIE['user_email']);
-        ?>
-        <?php if ($userLoggedIn): ?>
-            <a href="../Pages/logout.php" class="navlink">Logout</a>
+
+
+        <a href="#" class="navlink" id="user-container">Welcome, <?= $firstName ?>!</a>
+       
+
+        <?php if (isset($_SESSION['jwt'])): ?>
+          <a href="../Pages/logout.php" class="navlink">Logout</a>
         <?php else: ?>
-            <a href="../Pages/Login.html" class="navlink">Login</a>
+          <a href="../Pages/Login.html" class="navlink">Login</a>
         <?php endif; ?>
         <!-- <a href="../Pages/Login.html" class="navlink">Login</a> -->
 
@@ -109,6 +119,7 @@
       </div>
     </header>
     <main>
+      
       <!-- First Section  -->
       <section class="hero-section" id="home">
         <div class="left-hero">
@@ -134,8 +145,8 @@
       <!-- Second Section  -->
       <section class="product-category-section" id="hero">
         <h2 class="product-catagory-heading">Headphone Categories</h2>
-        <div class="product-categories">
-          <div class="product">
+        <div class="product-categories" id="category-area">
+          <!-- <div class="product">
             <figure class="menu-back">
               <img
                 src="../headphone_resources/menu1.jpg"
@@ -204,7 +215,7 @@
               />
             </figure>
             <h3>Realme Buds</h3>
-          </div>
+          </div> -->
         </div>
       </section>
 
@@ -311,6 +322,9 @@
       <!-- Fourth Section  -->
       <section class="contact-section">
         <h2 class="contact-heading">Contact Us</h2>
+        <div id="toast" class="toast">
+        <span id="toast-message"></span>
+      </div>
         <div class="contact-container">
           <div class="contact-left">
             <figure class="image-container">
@@ -408,8 +422,10 @@
               class="newletter-input"
               placeholder="Email"
               required
+              id="email-news"
               pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             />
+            <span id="emailError" style="color: red;"></span>
             <input type="submit" value="Subscribe" class="newletter-submit" />
           </form>
         </div>
@@ -453,7 +469,19 @@
     <script src="../Scripts/menutoggler.js"></script>
     <!-- Internal JS  -->
     <script>
-    document.getElementById("contact-from").addEventListener("submit", function (e) {
+      function showToast(message, type = "success") {
+        const toast = document.getElementById("toast");
+        const msg = document.getElementById("toast-message");
+
+        msg.textContent = message;
+
+        toast.className = `toast show ${type}`;
+
+        setTimeout(() => {
+          toast.className = "toast"; // hide after 3 sec
+        }, 3000);
+      }
+    document.getElementById("contact-from").addEventListener("submit", async function (e) {
       e.preventDefault();
 
       // Clear previous errors
@@ -494,32 +522,168 @@
         }
       }
 
+      
+      
+
       if (isValid) {
+        try{
+          const response = await fetch(`http://localhost/WaveAura/Backend/contact.php`,{
+          method:"POST",
+          body:formData
+        });
+
+        if(!response.ok){
+          throw new Error(`Formdata Sending Error ${response.status}`)
+        }
+
+        const result = await response.text();
+        if (result.includes("✅ User registered successfully")) {
+              // ✅ Signup successful → redirect to login page
+              showToast("✅ Message Sent Sucessfully...", "success");
+              
+            } else {
+              // ❌ Show message on screen instead
+              console.log("Signup failed: " + result);
+
+              showToast("❌ Email already exists!", "error");
+            }
+
+
+        } catch(err){
+          console.error("Something Went Wrong", err);
+        }
+        
+        
+
         this.reset();
       }
     });
   </script>
+
+  <!-- Category Data  -->
   <script>
-    const isLoggedIn = false;
-    const user = JSON.parse(localStorage.getItem("user"));
+    const category = document.querySelector("#category-area");
+    console.log(category);
+    category.innerHTML = "";
 
-    const user_container = document.querySelector("#user-container");
+    async function getCategoryData() {
 
-    
-    console.log(user_container);
-    
-    
+      try{
+        const response = await fetch(`http://localhost/WaveAura/Backend/category.php`);
 
-    if(user){
-      console.log(typeof user);
-      
-      user_container.textContent = "";
-      user_container.textContent = `Hello, ${user.name.split(" ")[0]}`;
-      console.log(user.name);
-      
-      
+        if(!response.ok){
+          throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+
+        const data = await response.json();
+        return data;
+      }
+      catch(err){
+        console.error("Something Went Wrong", err);
+      }
     }
+
+    async function renderCategory(){
+      let data = await getCategoryData();
+      
+      console.log(data);
+      
+      
+      data.forEach((cate)=>{
+        const catDiv = document.createElement("div");
+        catDiv.classList.add("product");
+
+        catDiv.innerHTML = `
+            <a href="#">
+            <figure class="menu-back">
+            
+              <img
+                src="${cate.imgsrc}"
+                class="menu-image"
+                alt="${cate.name} image"
+          />
+          
+        </figure>
+        </a>
+        <h3>${cate.name}</h3>
+        `;
+
+        category.appendChild(catDiv);
+
+
+      })
+    }
+
+    renderCategory()
+
+    
+    
+
   </script>
+  
+  <!-- Newsletter -->
+  <script>
+    
+
+      document.getElementById("newsletter-form").addEventListener("submit",async function (e) {
+  e.preventDefault(); // Prevent form from reloading
+
+  const emailInput = document.getElementById("email-news");
+  const emailError = document.getElementById("emailError");
+  const email = emailInput.value.trim();
+
+  // Clear previous error
+  emailError.textContent = "";
+
+  // Email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
+    emailError.textContent = "Please enter a valid email address.";
+    return;
+  }
+
+  // Create FormData and send to PHP
+  const formData = new FormData();
+  formData.append("email", email);
+
+  try {
+            const res = await fetch(
+              "http://localhost/WaveAura/Backend/newsletter.php",
+              {
+                method: "POST",
+                body: formData,
+              }
+            );
+
+            const result = await res.text();
+
+            if (result.includes("Email Saved Successfully")) {
+              // ✅ Signup successful → redirect to login page
+              showToast("✅ Email Saved Successfully", "success");
+              
+            } else {
+              // ❌ Show message on screen instead
+              console.log("Email Not Saved " + result);
+
+              showToast("❌ Email Not Saved", "error");
+            }
+          } catch (err) {
+            console.log(err.message);
+          }
+          this.reset();
+
+});
+
+
+      
+
+    
+
+  </script>
+
+
+  
   
 
     

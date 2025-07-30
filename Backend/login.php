@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+require __DIR__ . '/../vendor/autoload.php';
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
 
 // Show errors in browser for debugging
 ini_set('display_errors', 1);
@@ -37,11 +43,28 @@ try {
 
         // Verify password
         if (password_verify($password, $user['password'])) {
-            $cookieExpire = time() + 60 * 30; 
-            $isSecure = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
+            $_SESSION['user_name'] = $user["name"];
 
-            setcookie("user_email", $email, $cookieExpire, "/", "", $isSecure, true);
-            setcookie("user_name", $user["name"], $cookieExpire, "/", "", $isSecure, false);
+            // Create JWT
+            $secretKey = "your_super_secret_key";
+            $issuedAt = time();
+            $expirationTime = $issuedAt + (60 * 2); 
+
+            $payload = [
+                'iss' => 'http://localhost',
+                'aud' => 'http://localhost',
+                'iat' => $issuedAt,
+                'exp' => $expirationTime,
+                'data' => [
+                    'email' => $email,
+                    'name' => $user['name']
+                ]
+            ];
+
+            $jwt = JWT::encode($payload, $secretKey, 'HS256');
+            $_SESSION['jwt'] = $jwt;
+
+
 
 
             

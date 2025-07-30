@@ -8,7 +8,7 @@
       content="This is a landing page with a Simple User Form."
     />
     <meta name="author" content="Suman Saha" />
-    <title>Sign Up</title>
+    <title>Sign In</title>
     <link rel="stylesheet" href="../Stylesheets/formStyle.css" />
     <link
       rel="shortcut icon"
@@ -132,6 +132,9 @@
 
           formData.append("email", email);
           formData.append("password", password);
+
+          console.log(formData);
+          
 
           try {
             const result = await fetch(

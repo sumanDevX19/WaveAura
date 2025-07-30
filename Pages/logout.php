@@ -1,11 +1,7 @@
 <?php
-// Expire the cookies by setting the time in the past
-setcookie("user_email", "", time() - 3600, "/", "", true, true);
-setcookie("user_name", "", time() - 3600, "/", "", true, true);
-
-
-
-
-header("Location: Login.html");
+session_start();
+session_unset();    // Clear all session variables
+session_destroy();  // Destroy the session
+header("Location: login.html"); // Redirect to login
 exit;
 ?>
