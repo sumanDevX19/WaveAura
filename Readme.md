@@ -9,3 +9,5 @@
 - HTML
 - CSS
 - Javascript
+- PHP
+- MYSQL
