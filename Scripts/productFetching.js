@@ -15,12 +15,13 @@ async function getProductData() {
 }
 
 async function renderProductData() {
-  let data = await getProductData();
+  const data = await getProductData();
 
   data.forEach((product) => {
     const catDiv = document.createElement("div");
     catDiv.classList.add("product-card");
-    catDiv.dataset.id = product.id;
+
+    // Not needed unless you're using it elsewhere: catDiv.dataset.id = product.id;
 
     catDiv.innerHTML = `
       <figure class="product-figure">
@@ -44,7 +45,7 @@ async function renderProductData() {
         </div>
         <div class="product-price-buynow">
           <span class="amount">₹${product.price}</span>
-          <a href="#" class="buy-button" data-product-id="${product.id}">Add to Cart</a>
+          <a href="#" class="buy-button" data-id="${product.id}">Add to Cart</a>
         </div>
       </div>
     `;
@@ -52,8 +53,21 @@ async function renderProductData() {
     container.appendChild(catDiv);
   });
 
-  attachAddToCartListeners();
+  attachAddToCartListeners(); // ✅ Add listeners after DOM is updated
 }
+
+function showToast(message, type = "success") {
+      const toast = document.getElementById("toast");
+      const msg = document.getElementById("toast-message");
+
+      msg.textContent = message;
+
+      toast.className = `toast show ${type}`;
+
+      setTimeout(() => {
+        toast.className = "toast"; // hide after 3 sec
+      }, 3000);
+    }
 
 function attachAddToCartListeners() {
   const buttons = document.querySelectorAll(".buy-button");
@@ -61,7 +75,8 @@ function attachAddToCartListeners() {
   buttons.forEach((button) => {
     button.addEventListener("click", function (e) {
       e.preventDefault();
-      const productId = this.dataset.id;
+
+      const productId = parseInt(this.dataset.id); // ✅ using data-id here
 
       fetch("http://localhost/WaveAura/Backend/add_to_cart.php", {
         method: "POST",
@@ -70,21 +85,21 @@ function attachAddToCartListeners() {
         },
         body: `product_id=${productId}`
       })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === "success") {
-          alert("✅ Product added to cart!");
-        } else {
-          if (data.redirect) {
-            window.location.href = data.redirect;
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === "success") {
+            showToast("✅ Product added to cart!","success");
           } else {
-            alert("❌ Error: " + data.message);
+            if (data.redirect) {
+              window.location.href = data.redirect;
+            } else {
+              showToast(`❌ Error: ${data.message}`,"error");
+            }
           }
-        }
-      })
-      .catch(err => {
-        console.error("Error adding to cart:", err);
-      });
+        })
+        .catch((err) => {
+          console.error("Error adding to cart:", err);
+        });
     });
   });
 }
