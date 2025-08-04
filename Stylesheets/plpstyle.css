@@ -14,6 +14,7 @@ body {
     background-color: #d4d3d3bb;
     scroll-behavior: smooth;
     position: relative;
+    padding-top: 100px;
 }
 
 
@@ -234,8 +235,9 @@ body {
 .product-gallery,
 .contact-section,
 .embaded-video-section,
-.newletter-section {
-    /* margin-top: 30px; */
+.newletter-section,
+.all-product-listing-section {
+    
 
     padding: 20px 90px;
 

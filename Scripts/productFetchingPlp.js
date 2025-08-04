@@ -3,7 +3,7 @@ container.innerHTML = "";
 
 async function getProductData() {
   try {
-    const response = await fetch(`http://localhost/WaveAura/Backend/product.php?limit=4`);
+    const response = await fetch(`http://localhost/WaveAura/Backend/product.php`);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }

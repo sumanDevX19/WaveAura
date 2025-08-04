@@ -37,8 +37,8 @@
       <h2>WaveAura</h2>
     </div>
     <nav class="head-right">
-      <a href="#home" class="navlink">Home</a>
-      <a href="#hero" class="navlink" id="store">Store</a>
+      <a href="http://localhost/WaveAura/Pages/index.php" class="navlink">Home</a>
+      <a href="http://localhost/WaveAura/Pages/index.php#hero" class="navlink" id="store">Store</a>
       <a href="#" class="navlink">About</a>
       <a href="#" class="navlink">Contact</a>
 
@@ -111,7 +111,7 @@
     <a class="navlink" id="menu-icon"><i class="fa-solid fa-bars fa-2xl"></i></a>
 
     <div class="responsive-menu">
-      <a href="" class="responsive-menu-icon">Home</a>
+      <a href="http://localhost/WaveAura/Pages/index.php" class="responsive-menu-icon">Home</a>
       <a href="" class="responsive-menu-icon">Store</a>
       <a href="" class="responsive-menu-icon">About</a>
       <a href="" class="responsive-menu-icon">Contact</a>
@@ -124,9 +124,12 @@
 
   <main>
     <div class="main-container">
+      <div id="toast" class="toast">
+        <span id="toast-message"></span>
+      </div>
         <div class="left-section-main">
             <div class="cart-items">
-                <div class="cart-item">
+                <!-- <div class="cart-item">
                     <div class="image-quantity">
                         <figure>
                             <img src="../headphone_resources/headphone1.jpg" width="100" alt="">
@@ -245,8 +248,8 @@
                             <div>REMOVE</div>
                         </div>
                     </div>
-                </div>
-
+                </div> -->
+              
 
             </div>
             <div class="place-order-div">
@@ -255,19 +258,23 @@
 
         </div>
         <div class="right-section-main">
-          <h3>Price Details</h3>
-          <div class="price-div">
-            <h6>Price (2 items)</h6>
-            <h6>₹6000</h6>
-          </div>
-          <p>------------------------------------------</p>
-          <div class="total-price">
-            <h5>Total Price</h5>
-            <h5>₹8000</h5>
-          </div>
-            <p>------------------------------------------</p>
+  <h3>Price Details</h3>
 
-        </div>
+  <div class="price-div">
+    <h6>Price (<span id="total-items">0</span> items)</h6>
+    <h6>₹<span id="price-subtotal">0</span></h6>
+  </div>
+
+  <p>------------------------------------------</p>
+
+  <div class="total-price" >
+    <h5>Total Price</h5>
+    <h5>₹<span id="price-total">0</span></h5>
+  </div>
+
+  <p>------------------------------------------</p>
+</div>
+
 
     </div>
 
@@ -311,6 +318,7 @@
   </footer>
 
 <script src="../Scripts/menutoggler.js"></script>
+<script src="../Scripts//cartItemsRender.js"></script>
 </body>
 
 </html>

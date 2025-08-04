@@ -48,7 +48,7 @@ try {
             // Create JWT
             $secretKey = "your_super_secret_key";
             $issuedAt = time();
-            $expirationTime = $issuedAt + (60 * 10); 
+            $expirationTime = $issuedAt + (60 * 30); 
 
             $payload = [
                 'iss' => 'http://localhost',
