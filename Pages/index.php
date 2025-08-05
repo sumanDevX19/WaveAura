@@ -36,9 +36,9 @@
     </div>
     <nav class="head-right">
       <a href="#home" class="navlink">Home</a>
-      <a href="#hero" class="navlink" id="store">Store</a>
+      <a href="plp.php" class="navlink" id="store">Store</a>
       <a href="#" class="navlink">About</a>
-      <a href="#" class="navlink">Contact</a>
+      <a href="#contact" class="navlink">Contact</a>
 
 
       <?php
@@ -75,33 +75,33 @@
         <div class="navmenu-container">
           <div class="navmenu-column">
             <h5 class="heading-menu">Professional Headset</h5>
-            <a href="">Sony Headset</a>
-            <a href="">Samsung Headset</a>
-            <a href="">Apple Headset</a>
-            <a href="">Headset Under 40000/-</a>
-            <a href="">Headset Under 30000/-</a>
-            <a href="">Headset Under 20000/-</a>
-            <a href="">Headset Under 10000/-</a>
+            <a href="plp.php">Sony Headset</a>
+            <a href="plp.php">Samsung Headset</a>
+            <a href="plp.php">Apple Headset</a>
+            <a href="plp.php">Headset Under 40000/-</a>
+            <a href="plp.php">Headset Under 30000/-</a>
+            <a href="plp.php">Headset Under 20000/-</a>
+            <a href="plp.php">Headset Under 10000/-</a>
           </div>
           <div class="navmenu-column">
             <h5 class="heading-menu">Gaming Headset</h5>
-            <a href="">Sony Headset</a>
-            <a href="">Samsung Headset</a>
-            <a href="">Apple Headset</a>
-            <a href="">Headset Under 40000/-</a>
-            <a href="">Headset Under 30000/-</a>
-            <a href="">Headset Under 20000/-</a>
-            <a href="">Headset Under 10000/-</a>
+            <a href="plp.php">Sony Headset</a>
+            <a href="plp.php">Samsung Headset</a>
+            <a href="plp.php">Apple Headset</a>
+            <a href="plp.php">Headset Under 40000/-</a>
+            <a href="plp.php">Headset Under 30000/-</a>
+            <a href="plp.php">Headset Under 20000/-</a>
+            <a href="plp.php">Headset Under 10000/-</a>
           </div>
           <div class="navmenu-column">
             <h5 class="heading-menu">Production Headset</h5>
-            <a href="">Sony Headset</a>
-            <a href="">Samsung Headset</a>
-            <a href="">Apple Headset</a>
-            <a href="">Headset Under 40000/-</a>
-            <a href="">Headset Under 30000/-</a>
-            <a href="">Headset Under 20000/-</a>
-            <a href="">Headset Under 10000/-</a>
+            <a href="plp.php">Sony Headset</a>
+            <a href="plp.php">Samsung Headset</a>
+            <a href="plp.php">Apple Headset</a>
+            <a href="plp.php">Headset Under 40000/-</a>
+            <a href="plp.php">Headset Under 30000/-</a>
+            <a href="plp.php">Headset Under 20000/-</a>
+            <a href="plp.php">Headset Under 10000/-</a>
           </div>
         </div>
       </div>
@@ -130,7 +130,7 @@
           Hurry Limited period Offer.
         </p>
 
-        <a href="#">Order Now</a>
+        <a href="plp.php">Order Now</a>
       </div>
       <div class="right-hero">
         <figure>
@@ -225,14 +225,11 @@
       <h2 class="product-gallary-heading">Ultimate range of Products</h2>
       <div class="product-lineup">
         <!-- Data is Coming from js -->
-
-
-
       </div>
     </section>
 
     <!-- Fourth Section  -->
-    <section class="contact-section">
+    <section class="contact-section" id="contact">
       <h2 class="contact-heading">Contact Us</h2>
       <div id="toast" class="toast">
         <span id="toast-message"></span>

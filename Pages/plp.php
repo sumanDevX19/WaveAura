@@ -38,7 +38,7 @@
     </div>
     <nav class="head-right">
       <a href="http://localhost/WaveAura/Pages/index.php" class="navlink">Home</a>
-      <a href="http://localhost/WaveAura/Pages/index.php#hero" class="navlink" id="store">Store</a>
+      <a href="plp.php" class="navlink" id="store">Store</a>
       <a href="#" class="navlink">About</a>
       <a href="#" class="navlink">Contact</a>
 
@@ -77,33 +77,33 @@
         <div class="navmenu-container">
           <div class="navmenu-column">
             <h5 class="heading-menu">Professional Headset</h5>
-            <a href="">Sony Headset</a>
-            <a href="">Samsung Headset</a>
-            <a href="">Apple Headset</a>
-            <a href="">Headset Under 40000/-</a>
-            <a href="">Headset Under 30000/-</a>
-            <a href="">Headset Under 20000/-</a>
-            <a href="">Headset Under 10000/-</a>
+            <a href="plp.php">Sony Headset</a>
+            <a href="plp.php">Samsung Headset</a>
+            <a href="plp.php">Apple Headset</a>
+            <a href="plp.php">Headset Under 40000/-</a>
+            <a href="plp.php">Headset Under 30000/-</a>
+            <a href="plp.php">Headset Under 20000/-</a>
+            <a href="plp.php">Headset Under 10000/-</a>
           </div>
           <div class="navmenu-column">
             <h5 class="heading-menu">Gaming Headset</h5>
-            <a href="">Sony Headset</a>
-            <a href="">Samsung Headset</a>
-            <a href="">Apple Headset</a>
-            <a href="">Headset Under 40000/-</a>
-            <a href="">Headset Under 30000/-</a>
-            <a href="">Headset Under 20000/-</a>
-            <a href="">Headset Under 10000/-</a>
+            <a href="plp.php">Sony Headset</a>
+            <a href="plp.php">Samsung Headset</a>
+            <a href="plp.php">Apple Headset</a>
+            <a href="plp.php">Headset Under 40000/-</a>
+            <a href="plp.php">Headset Under 30000/-</a>
+            <a href="plp.php">Headset Under 20000/-</a>
+            <a href="plp.php">Headset Under 10000/-</a>
           </div>
           <div class="navmenu-column">
             <h5 class="heading-menu">Production Headset</h5>
-            <a href="">Sony Headset</a>
-            <a href="">Samsung Headset</a>
-            <a href="">Apple Headset</a>
-            <a href="">Headset Under 40000/-</a>
-            <a href="">Headset Under 30000/-</a>
-            <a href="">Headset Under 20000/-</a>
-            <a href="">Headset Under 10000/-</a>
+            <a href="plp.php">Sony Headset</a>
+            <a href="plp.php">Samsung Headset</a>
+            <a href="plp.php">Apple Headset</a>
+            <a href="plp.php">Headset Under 40000/-</a>
+            <a href="plp.php">Headset Under 30000/-</a>
+            <a href="plp.php">Headset Under 20000/-</a>
+            <a href="plp.php">Headset Under 10000/-</a>
           </div>
         </div>
       </div>
@@ -128,7 +128,7 @@
         <span id="toast-message"></span>
       </div>
       <section class="product-category-section" id="hero">
-      <h2 class="product-catagory-heading">Headphone Categories</h2>
+      <h2 class="product-catagory-heading">Headphone Store</h2>
       <div class="product-categories" id="category-area">
         <!-- Data is Comming from JS -->
       </div>

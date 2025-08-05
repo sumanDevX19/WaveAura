@@ -71,5 +71,5 @@ try {
     echo json_encode(["status" => "success", "cart" => $cartItems]);
 
 } catch (Exception $e) {
-    echo json_encode(["status" => "error", "message" => "Something went wrong", "details" => $e->getMessage()]);
+    echo json_encode(["status" => "error", "message" => "Something went wrong", "details" => $e->getMessage(), "redirect" => "http://localhost/WaveAura/Pages/Login.html"]);
 }
