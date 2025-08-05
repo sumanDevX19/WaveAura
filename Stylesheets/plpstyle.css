@@ -53,6 +53,11 @@ body {
     gap: 30px;
     position: relative;
 
+
+}
+
+.head-right>a {
+    font-size: 1.1rem;
 }
 
 /* Navigation Menu Start */
@@ -235,9 +240,8 @@ body {
 .product-gallery,
 .contact-section,
 .embaded-video-section,
-.newletter-section,
-.all-product-listing-section {
-    
+.newletter-section {
+    /* margin-top: 30px; */
 
     padding: 20px 90px;
 
@@ -364,6 +368,10 @@ body {
     /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #8E54E9, #4776E6);
     font-weight: 500;
+}
+
+a.buy-button {
+    font-size: 17px;
 }
 
 .product-price-buynow {
@@ -695,6 +703,9 @@ body {
 /* Media Query  */
 
 @media (min-width:787px) and (max-width:1024px) {
+    body{
+        padding-top: 80px;
+    }
     .head-section {
         max-width: 100vw;
         width: 100%;
@@ -715,6 +726,14 @@ body {
 
 
 
+    }
+
+    .head-right>a {
+        font-size: 1rem;
+    }
+
+    a.buy-button {
+        font-size: 13px;
     }
 
 
@@ -942,7 +961,10 @@ body {
 
 
 
-@media (min-width:681px) and (max-width:786px) {
+@media (min-width:701px) and (max-width:786px) {
+    body{
+        padding-top: 70px;
+    }
     .head-section {
         max-width: 100vw;
         width: 100%;
@@ -964,6 +986,21 @@ body {
 
     }
 
+    a.buy-button {
+        font-size: 13px;
+    }
+
+    .head-right>a {
+        font-size: 0.8rem;
+    }
+
+    .head-right {
+    
+    gap: 20px;
+    
+
+
+}
 
 
     #menu-icon {
@@ -1186,7 +1223,11 @@ body {
 
 }
 
-@media (min-width:480px) and (max-width:680px) {
+@media (min-width:480px) and (max-width:702px) {
+
+    body{
+        padding-top: 50px;
+    }
 
     .head-section {
         max-width: 100vw;
@@ -1207,6 +1248,10 @@ body {
         border-radius: 0px 0px 15px 15px;
 
 
+    }
+
+    a.buy-button {
+        font-size: 13px;
     }
 
     .head-right {
@@ -1412,6 +1457,9 @@ body {
 
 
 @media (min-width:320px) and (max-width:479px) {
+    body{
+        padding-top: 70px;
+    }
     .head-section {
         max-width: 100vw;
         width: 100%;
@@ -1431,6 +1479,10 @@ body {
         border-radius: 0px 0px 10px 10px;
 
 
+    }
+
+    a.buy-button {
+        font-size: 13px;
     }
 
     .head-left>h2 {

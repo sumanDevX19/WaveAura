@@ -38,7 +38,7 @@
       <a href="#home" class="navlink">Home</a>
       <a href="plp.php" class="navlink" id="store">Store</a>
       <a href="#" class="navlink">About</a>
-      <a href="#" class="navlink">Contact</a>
+      <a href="#contact" class="navlink">Contact</a>
 
 
       <?php
@@ -130,7 +130,7 @@
           Hurry Limited period Offer.
         </p>
 
-        <a href="#">Order Now</a>
+        <a href="plp.php">Order Now</a>
       </div>
       <div class="right-hero">
         <figure>
@@ -229,7 +229,7 @@
     </section>
 
     <!-- Fourth Section  -->
-    <section class="contact-section">
+    <section class="contact-section" id="contact">
       <h2 class="contact-heading">Contact Us</h2>
       <div id="toast" class="toast">
         <span id="toast-message"></span>

@@ -249,7 +249,10 @@
                         </div>
                     </div>
                 </div> -->
-              
+              <div class="no-item-class">
+                <h1>Empty Cart </h1>
+
+              </div>
 
             </div>
             <div class="place-order-div">
@@ -265,14 +268,14 @@
     <h6>₹<span id="price-subtotal">0</span></h6>
   </div>
 
-  <p>------------------------------------------</p>
+  
 
   <div class="total-price" >
     <h5>Total Price</h5>
     <h5>₹<span id="price-total">0</span></h5>
   </div>
 
-  <p>------------------------------------------</p>
+ 
 </div>
 
 
